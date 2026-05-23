@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vireo Jobs</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="hero">
+<nav>
+
+<div class="logo">
+    <img src="vireo-logo.png" alt="Vireo Jobs Logo">
+    <span>Vireo Jobs</span>
+</div>
+
+<ul>
+<li><a href="#">Home</a></li>
+<li><a href="#jobs">Jobs</a></li>
+<li><a href="#">Companies</a></li>
+<li><a href="#">About</a></li>
+<li><a href="#">Contact</a></li>
+</ul>
+</nav>
+
+<div class="hero-content">
+<div class="hero-left">
+<span class="tag">🚀 South Africa's Career Platform</span>
+<h1>Find Your Next Career Opportunity</h1>
+<p>Apply for remote, hybrid and onsite opportunities from top companies and recruitment partners.</p>
+
+<div class="search-wrapper">
+<div class="search-area">
+<input type="text" id="searchInput" placeholder="Search jobs e.g web developer" autocomplete="off">
+<button onclick="searchJobs()">Search</button>
+</div>
+<div class="suggestions" id="suggestions"></div>
+</div>
+</div>
+
+
+<div class="hero-logo-showcase">
+    <img src="vireo-logo.png" alt="Vireo Jobs">
+</div>
+
+<div class="hero-right">
+<div class="floating-card">
+<h3>120+ Live Jobs</h3>
+<p>Remote • Hybrid • Onsite</p>
+<div class="stats">
+<div>
+<strong>75</strong>
+<span>Remote</span>
+</div>
+<div>
+<strong>28</strong>
+<span>Hybrid</span>
+</div>
+<div>
+<strong>17</strong>
+<span>Onsite</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="priority-banner">
+<div class="priority-content">
+<span class="priority-pill">⭐ Priority Booster</span>
+<h3>Stand out faster to recruiters</h3>
+<p>Optional Priority Boosts can move your CV ahead of 100+ other applicants and improve visibility on recruiter shortlists.</p>
+</div>
+<a href="#jobs" class="priority-btn">Explore Jobs</a>
+</div>
+
+</header>
+
+<section class="boost-live-demo">
+<div class="boost-demo-header">
+<span class="boost-tag">🔥 Live Priority Movement</span>
+<h2>Watch Priority Boost change your ranking instantly</h2>
+<p>Your application keeps moving higher as stronger boosts are activated. The animation below simulates how recruiters see boosted applicants.</p>
+</div>
+
+<div class="boost-board">
+<div class="boost-board-top">
+<span>Recruiter Priority Queue</span>
+<span class="live-dot">LIVE</span>
+</div>
+
+<div id="priorityLeaderboard" class="priority-leaderboard"></div>
+
+<div class="boost-footer-note">
+⚡ Higher boosts move applicants closer to the top of recruiter visibility.
+</div>
+</div>
+</section>
+
+<section class="jobs-section" id="jobs">
+<div class="section-top">
+<h2>Featured Career Opportunities</h2>
+<p>Browse verified opportunities with detailed requirements and realistic career information.</p>
+</div>
+<div class="jobs-grid" id="jobsContainer"></div>
+</section>
+
+<footer>
+<p>© 2026 Vireo Jobs Platform</p>
+</footer>
+
+<div id="detailsModal" class="modal" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.7);overflow:auto;">
+<div class="modern-details-modal">
+<span onclick="closeModal()" class="modern-close-btn">&times;</span>
+<div id="modalContent"></div>
+</div>
+</div>
+
+
+
+<div id="applyModal" class="modal" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.7);overflow:auto;">
+<div class="application-wrapper">
+<span onclick="closeApplyModal()" class="close-btn">&times;</span>
+<div id="applicationContent">
+<h2>Apply for Position</h2>
+<form class="application-form">
+<div class="form-section">
+<h3>CV Upload</h3>
+<p>Add your CV to our database. We will review it and when a suitable role arises we will consider you for the position.</p>
+<label>Upload CV</label>
+<input type="file" accept=".pdf,.doc,.docx">
+</div>
+
+<div class="form-section">
+<h3>Personal Details</h3>
+<div class="form-grid">
+<input type="text" placeholder="First Name*" required>
+<input type="text" placeholder="Last Name*" required>
+<input type="email" placeholder="Email*" required>
+<select required>
+<option value="">Select your gender*</option>
+<option>Male</option>
+<option>Female</option>
+</select>
+<select required>
+<option value="">Select your nationality*</option>
+<option>South African</option>
+<option>Zimbabwean</option>
+<option>Botswanan</option>
+<option>Namibian</option>
+<option>Mozambican</option>
+<option>Zambian</option>
+<option>Lesotho</option>
+<option>Eswatini</option>
+<option>Other</option>
+</select>
+<select required>
+<option value="">Select your work eligibility*</option>
+<option>South African Citizen</option>
+<option>Permanent Resident</option>
+<option>Work Permit Holder</option>
+<option>Student Visa</option>
+</select>
+<input type="text" placeholder="ID Number*" required>
+<input type="tel" placeholder="Phone*" required>
+<input type="text" value="South Africa" readonly>
+<input type="text" placeholder="Province/State*" required>
+<input type="text" placeholder="City Name*" required>
+<input type="text" placeholder="Post Code*" required>
+<select required>
+<option value="">Select your ethnicity*</option>
+<option>African</option>
+<option>Coloured</option>
+<option>Asian</option>
+<option>White</option>
+<option>Other</option>
+</select>
+<div>
+<label>Profile Photo</label>
+<input type="file" accept="image/*">
+</div>
+</div>
+</div>
+
+<div class="form-section">
+<h3>Additional Documents</h3>
+<p>Add documents to your application.</p>
+<div class="form-grid">
+<select>
+<option value="">Document Type</option>
+<option>ID Document</option>
+<option>Passport</option>
+<option>Transcript</option>
+<option>CV</option>
+<option>Driver's License</option>
+<option>Matric Certificate</option>
+<option>Other</option>
+</select>
+<input type="file">
+</div>
+</div>
+
+<div class="form-section">
+<h3>Experience Summary</h3>
+<div class="form-grid">
+<input type="text" placeholder="Title">
+<input type="text" placeholder="Company">
+<div>
+<label>From</label>
+<input type="date">
+</div>
+<div>
+<label>To</label>
+<input type="date">
+</div>
+<label class="checkbox-label"><input type="checkbox"> I currently work here</label>
+<textarea placeholder="Summary"></textarea>
+</div>
+</div>
+
+<div class="form-section">
+<h3>Education</h3>
+<div class="form-grid">
+<input type="text" placeholder="School">
+<input type="text" placeholder="Field Of Study">
+<div>
+<label>From</label>
+<input type="date">
+</div>
+<div>
+<label>To</label>
+<input type="date">
+</div>
+<label class="checkbox-label"><input type="checkbox"> Studies Incomplete</label>
+<textarea placeholder="Summary"></textarea>
+</div>
+</div>
+
+<div class="form-section">
+<h3>Cover Letter</h3>
+<textarea placeholder="Write your cover letter here..."></textarea>
+<label class="checkbox-label"><input type="checkbox" required> I Accept Terms & Conditions</label>
+<p class="terms">By submitting your application, you're accepting our terms and conditions.</p>
+
+<div class="boost-section">
+<h3>Boost your application (optional)</h3>
+<p>Buy Priority Credits so your CV appears higher on the recruiter shortlist and gets noticed faster.</p>
+<div class="leaderboard" id="leaderboard">
+<div class="leader-row top"><span>1st Place - Sarah M.</span><strong>R100 Priority Credits</strong></div>
+<div class="leader-row"><span>2nd Place - David K.</span><strong>R95 Priority Credits</strong></div>
+<div class="leader-row"><span>3rd Place - Amanda T.</span><strong>R90 Priority Credits</strong></div>
+<div class="leader-row"><span>4th Place - Brian N.</span><strong>R80 Priority Credits</strong></div>
+<div class="leader-row"><span>5th Place - Lerato P.</span><strong>R70 Priority Credits</strong></div>
+</div>
+<div class="boost-box">
+<p class="boost-tip" id="boostTip">Pay more than <strong>R100</strong> to move your CV to the top position.</p>
+<div class="boost-controls">
+<button type="button" onclick="decreaseBoost()">-</button>
+<input type="number" id="boostAmount" value="105" min="0" oninput="updateBoostPreview()">
+<button type="button" onclick="increaseBoost()">+</button>
+</div>
+<p class="boost-note">Higher Priority Credits increase your chances of being seen first by HR managers.</p>
+</div>
+</div>
+
+<div class="payment-actions">
+
+<button type="submit" class="submit-btn">
+Submit Free Application
+</button>
+
+<form action="https://sandbox.payfast.co.za/eng/process" method="post" class="payfast-form">
+
+<input type="hidden" name="merchant_id" value="10000100">
+<input type="hidden" name="merchant_key" value="46f0cd694581a">
+
+<input type="hidden" name="amount" id="payfastAmount" value="105.00">
+
+<input type="hidden" name="item_name" value="Priority Job Boost">
+
+<input type="hidden" name="return_url" value="https://YOURDOMAIN.co.za/success.html">
+
+<input type="hidden" name="cancel_url" value="https://YOURDOMAIN.co.za/cancel.html">
+
+<button type="submit" class="pay-btn">
+⭐ Pay For Priority Position
+</button>
+
+</form>
+
+</div>
+
+</div>
+</form>
+</div>
+</div>
+</div>
+
+<script>
+
+const priorityScenarios = [
+[
+{name:"Lebo M.", amount:"R35", rank:1},
+{name:"You", amount:"R20", rank:2},
+{name:"Anele K.", amount:"R15", rank:3},
+{name:"Jason P.", amount:"R10", rank:4}
+],
+[
+{name:"You", amount:"R45", rank:1},
+{name:"Lebo M.", amount:"R35", rank:2},
+{name:"Anele K.", amount:"R20", rank:3},
+{name:"Jason P.", amount:"R10", rank:4}
+],
+[
+{name:"Lebo M.", amount:"R50", rank:1},
+{name:"Anele K.", amount:"R40", rank:2},
+{name:"You", amount:"R35", rank:3},
+{name:"Jason P.", amount:"R15", rank:4}
+],
+[
+{name:"Anele K.", amount:"R60", rank:1},
+{name:"You", amount:"R55", rank:2},
+{name:"Lebo M.", amount:"R30", rank:3},
+{name:"Jason P.", amount:"R20", rank:4}
+]
+];
+
+let scenarioIndex = 0;
+
+function renderPriorityBoard(){
+const container = document.getElementById("priorityLeaderboard");
+if(!container) return;
+
+const scenario = priorityScenarios[scenarioIndex];
+
+container.innerHTML = scenario.map((person,index)=>`
+<div class="priority-row ${person.name === 'You' ? 'you-row' : ''}">
+<div class="priority-rank">#${index+1}</div>
+<div class="priority-user">
+<span class="priority-name">${person.name}</span>
+<span class="priority-status">${person.name === 'You' ? 'Your application is climbing' : 'Priority active'}</span>
+</div>
+<div class="priority-amount">${person.amount}</div>
+</div>
+`).join('');
+
+scenarioIndex = (scenarioIndex + 1) % priorityScenarios.length;
+}
+
+renderPriorityBoard();
+setInterval(renderPriorityBoard, 2200);
+
+
+const jobs = [
+{title:'Data Entry Clerk',category:'Remote',location:'Remote - South Africa',salary:'R65 - R110/hour',type:'Part Time',experience:'No experience required',closing:'15 June 2026',requirements:['Grade 9 or Matric','Basic typing skills','Attention to detail'],description:'Capture company information, update spreadsheets and organize digital records from home.'},
+{title:'Customer Service Representative',category:'Remote',location:'Johannesburg / Remote',salary:'R80 - R150/hour',type:'Full Time',experience:'0-1 year',closing:'18 June 2026',requirements:['Matric certificate preferred','Good communication skills','Basic computer literacy'],description:'Assist customers through email, WhatsApp and phone support while resolving common account issues.'},
+{title:'Virtual Assistant',category:'Remote',location:'Remote',salary:'R75 - R140/hour',type:'Contract',experience:'No experience required',closing:'20 June 2026',requirements:['Basic admin skills','Reliable internet connection','Good English communication'],description:'Support business owners with emails, scheduling, online research and data capturing.'},
+{title:'Transcriptionist',category:'Remote',location:'Remote',salary:'R70 - R120/hour',type:'Flexible Hours',experience:'Entry Level',closing:'12 June 2026',requirements:['Good listening skills','Fast typing speed','Laptop or smartphone'],description:'Convert voice recordings and meetings into written text for businesses and content creators.'},
+{title:'Tutor',category:'Hybrid',location:'Gauteng',salary:'R120 - R180/hour',type:'Part Time',experience:'No formal experience required',closing:'25 June 2026',requirements:['Strong knowledge of school subjects','Good communication','Matric certificate'],description:'Help learners with homework, assignments and exam preparation online or in person.'},
+{title:'Online Teacher',category:'Remote',location:'Remote',salary:'R140 - R220/hour',type:'Contract',experience:'1 year preferred',closing:'22 June 2026',requirements:['Good speaking skills','Laptop with webcam','Teaching passion'],description:'Teach online lessons to students using Zoom or Google Meet platforms.'},
+{title:'Social Media Manager',category:'Remote',location:'Cape Town / Remote',salary:'R100 - R180/hour',type:'Full Time',experience:'0-1 year',closing:'16 June 2026',requirements:['Knowledge of TikTok and Instagram','Creative mindset','Canva skills preferred'],description:'Manage social media pages, reply to messages and create engaging online content.'},
+{title:'Graphic Designer',category:'Remote',location:'Remote',salary:'R120 - R200/hour',type:'Contract',experience:'1 year',closing:'28 June 2026',requirements:['Canva or Adobe knowledge','Portfolio preferred','Creative thinking'],description:'Design posters, social media graphics, flyers and digital marketing material.'},
+{title:'Blogger',category:'Remote',location:'Remote',salary:'R90 - R160/hour',type:'Freelance',experience:'No experience required',closing:'14 June 2026',requirements:['Good writing skills','Internet access','Social media knowledge'],description:'Write blog posts and online articles about lifestyle, careers, entertainment and technology.'},
+{title:'Copywriter',category:'Remote',location:'Remote',salary:'R120 - R190/hour',type:'Freelance',experience:'1 year preferred',closing:'19 June 2026',requirements:['Strong English writing','Creativity','Research skills'],description:'Create marketing content for websites, ads, social media and email campaigns.'},
+{title:'Editor',category:'Remote',location:'Remote',salary:'R130 - R200/hour',type:'Part Time',experience:'1 year preferred',closing:'17 June 2026',requirements:['Attention to grammar','Editing skills','Computer literacy'],description:'Review and improve written content for websites, blogs and business documents.'},
+{title:'Recruiter',category:'Hybrid',location:'Johannesburg',salary:'R110 - R180/hour',type:'Permanent',experience:'0-1 year',closing:'30 June 2026',requirements:['Good communication skills','Matric certificate','People skills'],description:'Assist companies with screening CVs, contacting candidates and arranging interviews.'},
+{title:'Travel Agent',category:'Remote',location:'Remote',salary:'R90 - R170/hour',type:'Flexible',experience:'Entry Level',closing:'27 June 2026',requirements:['Customer service skills','Internet research skills','Matric preferred'],description:'Help clients book flights, hotels and holiday packages while providing travel advice.'},
+{title:'Bookkeeper',category:'Remote',location:'Remote',salary:'R120 - R220/hour',type:'Contract',experience:'1-2 years',closing:'21 June 2026',requirements:['Basic accounting knowledge','Excel skills','Attention to detail'],description:'Record financial transactions, process invoices and maintain accurate business records.'},
+{title:'Event Planner',category:'Hybrid',location:'Pretoria',salary:'R100 - R180/hour',type:'Contract',experience:'No experience required',closing:'26 June 2026',requirements:['Organizational skills','Communication skills','Creative mindset'],description:'Coordinate weddings, birthdays, business events and community functions.'},
+{title:'Translator',category:'Remote',location:'Remote',salary:'R110 - R190/hour',type:'Freelance',experience:'Entry Level',closing:'23 June 2026',requirements:['Fluent in two languages','Writing skills','Attention to detail'],description:'Translate documents and messages into multiple languages while keeping the original meaning.'},
+{title:'Quality Assurance Tester',category:'Remote',location:'Remote',salary:'R120 - R210/hour',type:'Contract',experience:'0-1 year',closing:'24 June 2026',requirements:['Basic tech knowledge','Attention to detail','Problem-solving skills'],description:'Test websites and apps to identify bugs and improve user experience before launch.'},
+{title:'Animator',category:'Remote',location:'Remote',salary:'R150 - R250/hour',type:'Freelance',experience:'1 year preferred',closing:'29 June 2026',requirements:['Animation software skills','Creative portfolio','Time management'],description:'Create animated videos and motion graphics for brands, YouTube and advertisements.'},
+{title:'Medical Billing Representative',category:'Remote',location:'Remote',salary:'R90 - R160/hour',type:'Full Time',experience:'Training provided',closing:'18 June 2026',requirements:['Matric certificate','Good communication','Basic computer skills'],description:'Communicate with medical aid providers and process healthcare payment records.'},
+{title:'Frontend Web Developer',category:'Remote',location:'Remote',salary:'R180 - R320/hour',type:'Full Time',experience:'1-2 years',closing:'30 June 2026',requirements:['HTML, CSS and JavaScript','Portfolio projects','Problem-solving skills'],description:'Develop responsive websites and landing pages for businesses and startups.'},
+{title:'Backend Developer',category:'Remote',location:'Remote',salary:'R220 - R380/hour',type:'Permanent',experience:'2+ years',closing:'25 June 2026',requirements:['Node.js or Python','Database knowledge','API integration'],description:'Build scalable backend systems and APIs for local and international clients.'}
+];
+
+
+const boostData = {
+"Frontend Web Developer": {topAmount:120, defaultValue:125, leaders:[['1st Place','Jason R.','R120 Priority Credits'],['2nd Place','Naledi P.','R115 Priority Credits'],['3rd Place','Chris V.','R108 Priority Credits'],['4th Place','Emma T.','R96 Priority Credits'],['5th Place','Musa K.','R88 Priority Credits']]},
+"Backend Developer": {topAmount:135, defaultValue:140, leaders:[['1st Place','Kevin L.','R135 Priority Credits'],['2nd Place','Sibongile N.','R128 Priority Credits'],['3rd Place','Andre M.','R122 Priority Credits'],['4th Place','Liam B.','R110 Priority Credits'],['5th Place','Faith R.','R102 Priority Credits']]},
+"Virtual Assistant": {topAmount:90, defaultValue:95, leaders:[['1st Place','Olivia C.','R90 Priority Credits'],['2nd Place','Palesa D.','R86 Priority Credits'],['3rd Place','Nico S.','R82 Priority Credits'],['4th Place','Ayanda J.','R76 Priority Credits'],['5th Place','Rethabile M.','R70 Priority Credits']]},
+"Graphic Designer": {topAmount:110, defaultValue:115, leaders:[['1st Place','Kayla Z.','R110 Priority Credits'],['2nd Place','Mpho L.','R105 Priority Credits'],['3rd Place','Dylan H.','R99 Priority Credits'],['4th Place','Tumi P.','R92 Priority Credits'],['5th Place','Aiden G.','R84 Priority Credits']]},
+"Data Entry Clerk": {topAmount:85, defaultValue:90, leaders:[['1st Place','Zanele T.','R85 Priority Credits'],['2nd Place','Richard N.','R80 Priority Credits'],['3rd Place','Leah W.','R78 Priority Credits'],['4th Place','Bongani F.','R72 Priority Credits'],['5th Place','Cindy M.','R65 Priority Credits']]},
+"Call Centre Agent": {topAmount:95, defaultValue:100, leaders:[['1st Place','Jerome A.','R95 Priority Credits'],['2nd Place','Lerato S.','R90 Priority Credits'],['3rd Place','Nicole P.','R86 Priority Credits'],['4th Place','Trevor K.','R82 Priority Credits'],['5th Place','Yanga D.','R75 Priority Credits']]},
+"Administrative Clerk": {topAmount:88, defaultValue:93, leaders:[['1st Place','Bianca L.','R88 Priority Credits'],['2nd Place','Sizwe M.','R84 Priority Credits'],['3rd Place','Karabo T.','R80 Priority Credits'],['4th Place','Nadia C.','R74 Priority Credits'],['5th Place','Tshepo R.','R68 Priority Credits']]},
+"IT Support Technician": {topAmount:118, defaultValue:123, leaders:[['1st Place','Akhona P.','R118 Priority Credits'],['2nd Place','Megan H.','R112 Priority Credits'],['3rd Place','Victor S.','R107 Priority Credits'],['4th Place','Ruan D.','R98 Priority Credits'],['5th Place','Khumo L.','R91 Priority Credits']]},
+"Social Media Manager": {topAmount:105, defaultValue:110, leaders:[['1st Place','Chelsea B.','R105 Priority Credits'],['2nd Place','Okuhle N.','R101 Priority Credits'],['3rd Place','Brandon T.','R96 Priority Credits'],['4th Place','Lindo G.','R90 Priority Credits'],['5th Place','Amy F.','R82 Priority Credits']]},
+"Mine General Worker": {topAmount:92, defaultValue:97, leaders:[['1st Place','Patrick R.','R92 Priority Credits'],['2nd Place','Themba K.','R89 Priority Credits'],['3rd Place','John V.','R84 Priority Credits'],['4th Place','Sello M.','R78 Priority Credits'],['5th Place','Mandla P.','R72 Priority Credits']]},
+"Mine Safety Assistant": {topAmount:98, defaultValue:103, leaders:[['1st Place','Brian T.','R98 Priority Credits'],['2nd Place','Kgaugelo S.','R93 Priority Credits'],['3rd Place','Elton M.','R88 Priority Credits'],['4th Place','Nompumelelo D.','R82 Priority Credits'],['5th Place','Calvin R.','R76 Priority Credits']]},
+"Truck Driver": {topAmount:102, defaultValue:107, leaders:[['1st Place','Samuel H.','R102 Priority Credits'],['2nd Place','Vusi P.','R98 Priority Credits'],['3rd Place','Thato L.','R94 Priority Credits'],['4th Place','Morne J.','R88 Priority Credits'],['5th Place','Edwin C.','R80 Priority Credits']]},
+"Retail Cashier": {topAmount:75, defaultValue:80, leaders:[['1st Place','Kelly M.','R75 Priority Credits'],['2nd Place','Anathi R.','R72 Priority Credits'],['3rd Place','Peter N.','R69 Priority Credits'],['4th Place','Chloe S.','R64 Priority Credits'],['5th Place','Refilwe T.','R58 Priority Credits']]},
+"Warehouse Assistant": {topAmount:82, defaultValue:87, leaders:[['1st Place','Marius D.','R82 Priority Credits'],['2nd Place','Andiswa P.','R78 Priority Credits'],['3rd Place','Gift L.','R74 Priority Credits'],['4th Place','Rochelle B.','R68 Priority Credits'],['5th Place','Isaac M.','R62 Priority Credits']]},
+"Security Guard": {topAmount:87, defaultValue:92, leaders:[['1st Place','Dumisani K.','R87 Priority Credits'],['2nd Place','Craig V.','R83 Priority Credits'],['3rd Place','Asanda P.','R79 Priority Credits'],['4th Place','Johan M.','R74 Priority Credits'],['5th Place','Pretty L.','R67 Priority Credits']]},
+"Receptionist": {topAmount:93, defaultValue:98, leaders:[['1st Place','Natasha F.','R93 Priority Credits'],['2nd Place','Mvelo S.','R89 Priority Credits'],['3rd Place','Carmen D.','R85 Priority Credits'],['4th Place','Siphesihle T.','R80 Priority Credits'],['5th Place','Lauren P.','R72 Priority Credits']]},
+"Junior Accountant": {topAmount:112, defaultValue:117, leaders:[['1st Place','Gerald M.','R112 Priority Credits'],['2nd Place','Boitumelo R.','R108 Priority Credits'],['3rd Place','Shane K.','R102 Priority Credits'],['4th Place','Keitumetse P.','R96 Priority Credits'],['5th Place','Yolanda C.','R88 Priority Credits']]},
+"SEO Specialist": {topAmount:108, defaultValue:113, leaders:[['1st Place','Alicia N.','R108 Priority Credits'],['2nd Place','Jared T.','R104 Priority Credits'],['3rd Place','Luthando M.','R98 Priority Credits'],['4th Place','Devon S.','R92 Priority Credits'],['5th Place','Mia R.','R86 Priority Credits']]},
+"Cybersecurity Analyst": {topAmount:145, defaultValue:150, leaders:[['1st Place','Warren K.','R145 Priority Credits'],['2nd Place','Onke P.','R138 Priority Credits'],['3rd Place','Daniel H.','R132 Priority Credits'],['4th Place','Nokuthula M.','R124 Priority Credits'],['5th Place','Tyrone B.','R116 Priority Credits']]},
+"Electrician Assistant": {topAmount:91, defaultValue:96, leaders:[['1st Place','Sipho Z.','R91 Priority Credits'],['2nd Place','Martin L.','R87 Priority Credits'],['3rd Place','Puseletso K.','R82 Priority Credits'],['4th Place','Clinton R.','R76 Priority Credits'],['5th Place','Bulelwa T.','R70 Priority Credits']]},
+
+"Customer Service Representative": {topAmount:97, defaultValue:102, leaders:[['1st Place','Nadine R.','R97 Priority Credits'],['2nd Place','Tshepo K.','R92 Priority Credits'],['3rd Place','Melissa J.','R88 Priority Credits'],['4th Place','Luyanda P.','R83 Priority Credits'],['5th Place','Gareth M.','R76 Priority Credits']]},
+"Transcriptionist": {topAmount:84, defaultValue:89, leaders:[['1st Place','Hannah C.','R84 Priority Credits'],['2nd Place','Banele S.','R80 Priority Credits'],['3rd Place','Irene T.','R76 Priority Credits'],['4th Place','Kagiso L.','R70 Priority Credits'],['5th Place','Megan V.','R64 Priority Credits']]},
+"Tutor": {topAmount:108, defaultValue:113, leaders:[['1st Place','Rachel P.','R108 Priority Credits'],['2nd Place','Ofentse M.','R104 Priority Credits'],['3rd Place','Daniel H.','R99 Priority Credits'],['4th Place','Zinzi K.','R93 Priority Credits'],['5th Place','Caleb N.','R87 Priority Credits']]},
+"Online Teacher": {topAmount:112, defaultValue:117, leaders:[['1st Place','Nomvula D.','R112 Priority Credits'],['2nd Place','Jason T.','R108 Priority Credits'],['3rd Place','Keitumetse R.','R102 Priority Credits'],['4th Place','Abigail S.','R96 Priority Credits'],['5th Place','Prince M.','R90 Priority Credits']]},
+"Blogger": {topAmount:79, defaultValue:84, leaders:[['1st Place','Courtney L.','R79 Priority Credits'],['2nd Place','Sinethemba P.','R75 Priority Credits'],['3rd Place','Warren K.','R71 Priority Credits'],['4th Place','Aphiwe N.','R66 Priority Credits'],['5th Place','Janine B.','R60 Priority Credits']]},
+"Copywriter": {topAmount:101, defaultValue:106, leaders:[['1st Place','Lucia F.','R101 Priority Credits'],['2nd Place','Mpho R.','R96 Priority Credits'],['3rd Place','Trey S.','R91 Priority Credits'],['4th Place','Boitumelo T.','R86 Priority Credits'],['5th Place','Riley D.','R80 Priority Credits']]},
+"Editor": {topAmount:94, defaultValue:99, leaders:[['1st Place','Farah M.','R94 Priority Credits'],['2nd Place','Dineo K.','R90 Priority Credits'],['3rd Place','Ethan V.','R86 Priority Credits'],['4th Place','Samantha G.','R81 Priority Credits'],['5th Place','Brett N.','R74 Priority Credits']]},
+"Recruiter": {topAmount:116, defaultValue:121, leaders:[['1st Place','Taryn P.','R116 Priority Credits'],['2nd Place','Mandla H.','R111 Priority Credits'],['3rd Place','Chelsea R.','R106 Priority Credits'],['4th Place','Yusuf A.','R98 Priority Credits'],['5th Place','Retha S.','R91 Priority Credits']]},
+"Travel Agent": {topAmount:89, defaultValue:94, leaders:[['1st Place','Kiara D.','R89 Priority Credits'],['2nd Place','Sibusiso L.','R85 Priority Credits'],['3rd Place','Tammy V.','R81 Priority Credits'],['4th Place','Lethabo P.','R76 Priority Credits'],['5th Place','Dylan C.','R70 Priority Credits']]},
+"Bookkeeper": {topAmount:99, defaultValue:104, leaders:[['1st Place','Heidi T.','R99 Priority Credits'],['2nd Place','Vuyani M.','R95 Priority Credits'],['3rd Place','Clarissa J.','R90 Priority Credits'],['4th Place','Neo K.','R84 Priority Credits'],['5th Place','Stefan B.','R78 Priority Credits']]},
+"Event Planner": {topAmount:91, defaultValue:96, leaders:[['1st Place','Roxanne P.','R91 Priority Credits'],['2nd Place','Anele T.','R87 Priority Credits'],['3rd Place','Jordan M.','R83 Priority Credits'],['4th Place','Nokuthula R.','R78 Priority Credits'],['5th Place','Glen S.','R72 Priority Credits']]},
+"Translator": {topAmount:96, defaultValue:101, leaders:[['1st Place','Yolanda K.','R96 Priority Credits'],['2nd Place','Pieter N.','R92 Priority Credits'],['3rd Place','Mariam A.','R88 Priority Credits'],['4th Place','Katlego D.','R82 Priority Credits'],['5th Place','Alicia F.','R76 Priority Credits']]},
+"Quality Assurance Tester": {topAmount:107, defaultValue:112, leaders:[['1st Place','Brandon C.','R107 Priority Credits'],['2nd Place','Londiwe P.','R103 Priority Credits'],['3rd Place','Eugene M.','R98 Priority Credits'],['4th Place','Nicole T.','R92 Priority Credits'],['5th Place','Shaun R.','R86 Priority Credits']]},
+"Animator": {topAmount:104, defaultValue:109, leaders:[['1st Place','Tiffany L.','R104 Priority Credits'],['2nd Place','Khaya S.','R100 Priority Credits'],['3rd Place','Devon P.','R95 Priority Credits'],['4th Place','Nadia R.','R89 Priority Credits'],['5th Place','Liam T.','R83 Priority Credits']]},
+"Medical Billing Representative": {topAmount:109, defaultValue:114, leaders:[['1st Place','Vanessa M.','R109 Priority Credits'],['2nd Place','Tumelo K.','R105 Priority Credits'],['3rd Place','Shane D.','R100 Priority Credits'],['4th Place','Belinda P.','R94 Priority Credits'],['5th Place','Colin J.','R88 Priority Credits']]},
+
+};
+
+let currentBoostData = null;
+let currentPreviewRank = 3;
+
+function getPreviewRank(amount, leaders){
+ let rank = leaders.findIndex(person => amount > person.amount) + 1;
+ if(rank === 0) rank = leaders.length + 1;
+ return Math.min(rank,5);
+}
+
+function renderLeaderboard(previewAmount = null, animateDirection = 'up'){
+ const leaderboard = document.getElementById('leaderboard');
+ if(!currentBoostData || !leaderboard) return;
+ 
+ const leaders = currentBoostData.leaders.map((leader,index)=>({
+  name:leader[1],
+  amount:parseInt(leader[2].match(/\d+/)[0]),
+  preview:false
+ }));
+
+ if(previewAmount && previewAmount > 0){
+   const rank = getPreviewRank(previewAmount, leaders);
+   currentPreviewRank = rank;
+   leaders.splice(rank - 1, 0, {
+      name:'You',
+      amount:previewAmount,
+      preview:true
+   });
+   leaders.splice(5);
+ }
+ 
+ const suffix = ['1st Place','2nd Place','3rd Place','4th Place','5th Place'];
+ 
+ leaderboard.innerHTML = leaders.map((leader,index)=>{
+  const moveClass = leader.preview
+    ? (animateDirection === 'up' ? 'move-up' : animateDirection === 'down' ? 'move-down' : 'preview-row')
+    : 'fade-move';
+
+  const crown = index === 0 ? '👑' : index === 1 ? '🔥' : index === 2 ? '⚡' : '✨';
+
+  return `
+   <div class="leader-row ${index===0 ? 'top' : ''} ${leader.preview ? 'preview-row' : ''} ${moveClass}">
+      <div class="leader-user">
+        <div class="leader-rank">${crown}</div>
+        <div>
+          <span>${suffix[index]}</span>
+          <h4>${leader.name}</h4>
+        </div>
+      </div>
+      <strong>R${leader.amount}</strong>
+   </div>`;
+ }).join('');
+}
+
+function updateBoostPreview(direction = 'neutral'){
+ const amount = parseInt(document.getElementById('boostAmount').value || 0);
+ renderLeaderboard(amount, direction);
+}
+
+function updateBoostSection(jobTitle){
+ currentBoostData = boostData[jobTitle];
+ if(!currentBoostData) return;
+ const thirdPlaceAmount = parseInt(currentBoostData.leaders[2][2].match(/\d+/)[0]);
+ document.getElementById('boostTip').innerHTML = `Increase your Priority Credits to climb higher on the recruiter leaderboard in real time.`;
+ document.getElementById('boostAmount').value = thirdPlaceAmount;
+ renderLeaderboard(thirdPlaceAmount, 'neutral');
+}
+
+function getBadgeClass(category){
+return category.toLowerCase();
+}
+
+function displayJobs(filteredJobs){
+const container = document.getElementById('jobsContainer');
+container.innerHTML='';
+
+if(filteredJobs.length===0){
+container.innerHTML='<h3>No jobs found.</h3>';
+return;
+}
+
+filteredJobs.forEach(job=>{
+const requirements = job.requirements.map(req => `<li>${req}</li>`).join('');
+
+container.innerHTML += `
+<div class="job-card">
+<div class="card-top">
+<span class="badge ${getBadgeClass(job.category)}">${job.category}</span>
+<span class="closing">Closing: ${job.closing}</span>
+</div>
+
+<h3>${job.title}</h3>
+<p class="job-desc">${job.description}</p>
+
+<div class="job-info">
+<div><span>Location</span><strong>${job.location}</strong></div>
+<div><span>Salary</span><strong>${job.salary}</strong></div>
+<div><span>Experience</span><strong>${job.experience}</strong></div>
+<div><span>Employment</span><strong>${job.type}</strong></div>
+</div>
+
+<div class="requirements">
+<h4>Requirements</h4>
+<ul>${requirements}</ul>
+</div>
+
+<div class="card-buttons">
+<button class="details-btn" onclick="showDetails('${job.title}')">View Details</button>
+<button onclick="applyJob('${job.title}')">Apply Now</button>
+</div>
+</div>`;
+});
+}
+
+function searchJobs(){
+const value = document.getElementById('searchInput').value.toLowerCase();
+const filtered = jobs.filter(job => job.title.toLowerCase().includes(value));
+displayJobs(filtered);
+}
+
+const searchInput = document.getElementById('searchInput');
+const suggestions = document.getElementById('suggestions');
+
+searchInput.addEventListener('input', ()=>{
+const value = searchInput.value.toLowerCase();
+
+if(value.length < 2){
+suggestions.innerHTML='';
+searchJobs();
+return;
+}
+
+const matched = jobs.filter(job => job.title.toLowerCase().includes(value)).slice(0,6);
+
+suggestions.innerHTML = matched.map(job => `
+<div class="suggestion-item" onclick="selectSuggestion('${job.title}')">${job.title}</div>
+`).join('');
+
+searchJobs();
+});
+
+function selectSuggestion(title){
+searchInput.value = title;
+suggestions.innerHTML='';
+searchJobs();
+}
+
+function applyJob(jobTitle){
+document.getElementById('applyModal').style.display='block';
+document.getElementById('applicationContent').querySelector('h2').innerText='Apply for ' + jobTitle;
+updateBoostSection(jobTitle);
+}
+
+function closeApplyModal(){
+document.getElementById('applyModal').style.display='none';
+}
+
+
+
+function showDetails(jobTitle){
+const job = jobs.find(j => j.title === jobTitle);
+if(!job) return;
+
+const reqs = job.requirements.map(r => `
+<li>
+<span>✓</span>
+<p>${r}</p>
+</li>
+`).join('');
+
+const content = `
+<div class="job-modal-header">
+<div>
+<span class="job-modal-pill">${job.category}</span>
+<h2>${job.title}</h2>
+<p class="job-modal-subtitle">${job.location} • ${job.type}</p>
+</div>
+
+<div class="job-modal-salary-card">
+<span>Estimated Pay</span>
+<h3>${job.salary}</h3>
+<p>${job.experience}</p>
+</div>
+</div>
+
+<div class="job-modal-grid">
+
+<div class="job-modal-box">
+<h3>Job Overview</h3>
+<div class="job-overview-items">
+<div>
+<span>Reference</span>
+<strong>RH-${job.title.substring(0,3).toUpperCase()}-2026</strong>
+</div>
+
+<div>
+<span>Closing Date</span>
+<strong>${job.closing}</strong>
+</div>
+
+<div>
+<span>Employment</span>
+<strong>${job.type}</strong>
+</div>
+
+<div>
+<span>Education</span>
+<strong>Grade 9 / Matric Friendly</strong>
+</div>
+</div>
+</div>
+
+<div class="job-modal-box highlight-box">
+<h3>Why You Should Apply</h3>
+<p>
+This opportunity is beginner-friendly and designed for motivated candidates looking to grow their careers. 
+Even if you do not have years of experience, you are encouraged to apply if you are willing to learn and work hard.
+</p>
+</div>
+
+</div>
+
+<div class="job-description-box">
+<h3>About This Opportunity</h3>
+<p>${job.description}</p>
+</div>
+
+<div class="requirements-box">
+<h3>Minimum Requirements</h3>
+<ul class="modern-req-list">
+${reqs}
+</ul>
+</div>
+
+<div class="responsibilities-box">
+<h3>Key Responsibilities</h3>
+
+<div class="responsibility-grid">
+<div class="responsibility-card">
+<h4>Daily Tasks</h4>
+<p>Assist with assigned duties, communicate professionally and support daily operations.</p>
+</div>
+
+<div class="responsibility-card">
+<h4>Teamwork</h4>
+<p>Collaborate with colleagues and maintain a positive work environment.</p>
+</div>
+
+<div class="responsibility-card">
+<h4>Growth Opportunity</h4>
+<p>Gain valuable industry experience and improve your professional skills.</p>
+</div>
+</div>
+</div>
+
+<div class="modal-action-bar">
+<button class="secondary-action" onclick="closeModal()">Close</button>
+<button class="primary-action" onclick="closeModal(); applyJob('${job.title}')">Apply For This Job</button>
+</div>
+`;
+
+document.getElementById('modalContent').innerHTML = content;
+document.getElementById('detailsModal').style.display='block';
+}
+
+
+function closeModal(){
+document.getElementById('detailsModal').style.display='none';
+}
+
+window.onclick = function(event){
+const modal = document.getElementById('detailsModal');
+if(event.target === modal){
+modal.style.display='none';
+}
+if(event.target === document.getElementById('applyModal')){
+document.getElementById('applyModal').style.display='none';
+}
+}
+
+document.addEventListener('submit', function(e){
+if(e.target.classList.contains('application-form')){
+e.preventDefault();
+alert('Your application has been submitted successfully.');
+closeApplyModal();
+}
+});
+
+displayJobs(jobs);
+
+function increaseBoost(){
+const input=document.getElementById('boostAmount');
+input.value=parseInt(input.value||0)+5;
+ updateBoostPreview('up');
+}
+function decreaseBoost(){
+const input=document.getElementById('boostAmount');
+if(parseInt(input.value)>0){input.value=parseInt(input.value)-5; updateBoostPreview('down');}
+}
+
+document.addEventListener('submit',function(e){
+if(e.target.classList.contains('application-form')){
+ e.preventDefault();
+ const amount=parseInt(document.getElementById('boostAmount').value||0);
+ if(amount<101){
+ alert('Your application was submitted. Tip: Pay more than R100 Priority Credits to improve your visibility and appear above other applicants.');
+ } else {
+ alert('Application submitted successfully! Your boosted Priority Credits will help your CV appear higher on the recruiter shortlist.');
+ }
+}
+});
+</script>
+</body>
+</html>
