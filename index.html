@@ -265,33 +265,17 @@
 <p class="boost-note">Higher Priority Credits increase your chances of being seen first by HR managers.</p>
 </div>
 </div>
+    <div class="payment-actions">
 
-<div class="payment-actions">
+        <button type="submit" class="submit-btn">
+            Submit Free Application
+        </button>
 
-<button type="submit" class="submit-btn">
-Submit Free Application
-</button>
+        <button type="button" class="pay-btn" onclick="payWithPayFast()">
+            ⭐ Pay For Priority Position
+        </button>
 
-<form action="https://www.payfast.co.za/eng/process" method="post" class="payfast-form">
-
-<input type="hidden" name="merchant_id" value="35397261">
-<input type="hidden" name="merchant_key" value="vodmc74trvvrz">
-
-<input type="hidden" name="amount" id="payfastAmount" value="105.00">
-
-<input type="hidden" name="item_name" value="Priority Job Boost">
-
-<input type="hidden" name="return_url" value="https://vireo-jobs.vercel.app/success.html">
-
-<input type="hidden" name="cancel_url" value="https://vireo-jobs.vercel.app/cancel.html">
-
-<button type="submit" class="pay-btn">
-⭐ Pay For Priority Position
-</button>
-
-</form>
-
-</div>
+    </div>
 
 </div>
 </form>
@@ -723,17 +707,23 @@ const input=document.getElementById('boostAmount');
 if(parseInt(input.value)>0){input.value=parseInt(input.value)-5; updateBoostPreview('down');}
 }
 
-document.addEventListener('submit',function(e){
-if(e.target.classList.contains('application-form')){
- e.preventDefault();
- const amount=parseInt(document.getElementById('boostAmount').value||0);
- if(amount<101){
- alert('Your application was submitted. Tip: Pay more than R100 Priority Credits to improve your visibility and appear above other applicants.');
- } else {
- alert('Application submitted successfully! Your boosted Priority Credits will help your CV appear higher on the recruiter shortlist.');
- }
+function payWithPayFast(){
+
+const amount = document.getElementById('boostAmount').value || '105';
+
+const merchantId = '35397261';
+const merchantKey = 'vodmc74trvvrz';
+
+const itemName = encodeURIComponent('Priority Job Boost');
+
+const returnUrl = encodeURIComponent('https://vireo-jobs.vercel.app/success.html');
+const cancelUrl = encodeURIComponent('https://vireo-jobs.vercel.app/cancel.html');
+
+const paymentUrl = `https://www.payfast.co.za/eng/process?merchant_id=${merchantId}&merchant_key=${merchantKey}&amount=${amount}&item_name=${itemName}&return_url=${returnUrl}&cancel_url=${cancelUrl}`;
+
+window.location.href = paymentUrl;
+
 }
-});
 </script>
 </body>
 </html>
