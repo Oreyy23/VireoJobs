@@ -258,6 +258,9 @@
 <label class="checkbox-label"><input type="checkbox" required> I Accept Terms & Conditions</label>
 <p class="terms">By submitting your application, you're accepting our terms and conditions.</p>
 
+
+
+
 <div class="boost-section">
 <h3>Boost your application (optional)</h3>
 <p>Buy Priority Credits so your CV appears higher on the recruiter shortlist and gets noticed faster.</p>
@@ -503,7 +506,7 @@ container.innerHTML += `
 <div class="job-card">
 <div class="card-top">
 <span class="badge ${getBadgeClass(job.category)}">${job.category}</span>
-<span class="closing">Closing: ${job.closing}</span>
+
 </div>
 
 <h3>${job.title}</h3>
@@ -610,10 +613,6 @@ const content = `
 <strong>RH-${job.title.substring(0,3).toUpperCase()}-2026</strong>
 </div>
 
-<div>
-<span>Closing Date</span>
-<strong>${job.closing}</strong>
-</div>
 
 <div>
 <span>Employment</span>
