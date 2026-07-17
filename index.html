@@ -87,6 +87,10 @@
 <h3>Stand out faster to recruiters</h3>
 <p>Optional Priority Boosts can move your CV ahead of 100+ other applicants and improve visibility on recruiter shortlists.</p>
 </div>
+
+    <button id="payButton" class="priority-btn">
+        Boost My Profile – R79
+    </button>
 <a href="#jobs" class="priority-btn">Explore Jobs</a>
 </div>
 
@@ -736,6 +740,34 @@ const paymentUrl = `https://www.payfast.co.za/eng/process?merchant_id=${merchant
 window.location.href = paymentUrl;
 
 }
+</script>
+
+<script>
+    document.getElementById("payButton").addEventListener("click", async () => {
+        try {
+            const response = await fetch("/api/create-checkout", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    amount: 7900, // R79.00 in cents
+                    description: "Priority Profile Boost"
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.redirectUrl) {
+                window.location.href = data.redirectUrl;
+            } else {
+                alert("Unable to start payment.");
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Something went wrong.");
+        }
+    });
 </script>
 </body>
 </html>
